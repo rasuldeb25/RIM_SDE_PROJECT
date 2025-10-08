@@ -1,0 +1,7 @@
+com\visioncare\appointments\Appointment.class
+com\visioncare\auth\AuthController$LoginRequest.class
+com\visioncare\auth\AuthController.class
+com\visioncare\BackendApplication.class
+com\visioncare\config\CorsConfig.class
+com\visioncare\appointments\AppointmentController.class
+com\visioncare\appointments\AppointmentRepository.class
