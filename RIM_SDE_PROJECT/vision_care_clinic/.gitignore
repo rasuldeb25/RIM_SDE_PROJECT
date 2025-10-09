@@ -1,0 +1,30 @@
+# Maven
+target/
+*.jar
+*.war
+*.ear
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build tools
+.vite/
+dist/
+build/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled class files
+*.class

@@ -1,5 +1,8 @@
 package com.visioncare.appointments;
 
+import com.visioncare.patients.Patient;
+import com.visioncare.doctors.Doctor;
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +14,9 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "appointments")
@@ -46,6 +52,21 @@ public class Appointment {
     private String service;
 
     private String notes;
+    
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
+    @ManyToOne  
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
+    private String status = "booked"; // booked, completed, cancelled
+
+    private String reasonForVisit;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
 
 
