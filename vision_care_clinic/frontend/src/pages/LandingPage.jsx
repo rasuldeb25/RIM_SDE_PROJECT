@@ -1,51 +1,78 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
-// --- Reusable UI Components (from /components/ui/) ---
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
-import Hero from "../components/ui/Hero";
-import Services from "../components/ui/Services";
-import AppointmentForm from "../components/ui/AppointmentForm";
-import LoginModal from "../components/ui/LoginModal";
+// This component now handles both Login and Registration.
+export default function LoginModal({ onClose, onLoginSuccess }) {
+    // This state tracks whether we are in "login" or "register" mode.
+    const [isRegistering, setIsRegistering] = useState(false);
 
-// --- Main Page Component ---
-
-// This component assembles the entire landing page.
-export default function LandingPage() {
-    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-
-    // Refs are used for smooth scrolling
-    const servicesRef = useRef(null);
-    const appointmentRef = useRef(null);
-
-    const scrollToRef = (ref) => {
-        ref.current?.scrollIntoView({ behavior: 'smooth' });
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        // In a real app, you would check if isRegistering is true
+        // and send data to a '/api/auth/register' endpoint.
+        // For now, any successful submission will lead to the dashboard.
+        onLoginSuccess();
     };
 
     return (
-        <div className="bg-gray-50 font-sans text-gray-800">
-            <Header
-                onLoginClick={() => setLoginModalOpen(true)}
-                onNavClick={scrollToRef}
-                refs={{ servicesRef, appointmentRef }}
-            />
-            <main className="pt-20"> {/* Padding to offset the fixed header */}
-                <Hero
-                    onBookClick={() => scrollToRef(appointmentRef)}
-                    onServicesClick={() => scrollToRef(servicesRef)}
-                />
-                <div ref={servicesRef} className="services">
-                    <Services />
-                </div>
-                <div ref={appointmentRef}>
-                    <AppointmentForm />
-                </div>
-            </main>
-            <Footer onLoginClick={() => setLoginModalOpen(true)} />
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4">
+            <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative transition-all duration-300">
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
 
-            {/* The modal is only rendered when its state is true */}
-            {isLoginModalOpen && <LoginModal onClose={() => setLoginModalOpen(false)} />}
+                <h2 className="text-2xl font-bold text-center text-indigo-600 mb-6">
+                    {isRegistering ? 'Create Your Account' : 'Patient Portal Login'}
+                </h2>
+
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                    {/* These fields only show when isRegistering is true */}
+                    {isRegistering && (
+                        <>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                    <input id="firstName" type="text" required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
+                                </div>
+                                <div>
+                                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                    <input id="lastName" type="text" required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input id="phone" type="tel" required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
+                            </div>
+                        </>
+                    )}
+
+                    {/* These fields are for both login and registration */}
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input id="email" type="email" required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
+                    </div>
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input id="password" type="password" required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
+                    </div>
+
+                    <button type="submit" className="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition-all">
+                        {isRegistering ? 'Register' : 'Sign In'}
+                    </button>
+
+                    <p className="text-center text-sm text-gray-600 pt-2">
+                        {isRegistering ? (
+                            <>
+                                Already have an account?{' '}
+                                <button type="button" onClick={() => setIsRegistering(false)} className="font-medium text-indigo-600 hover:underline">Sign In</button>
+                            </>
+                        ) : (
+                            <>
+                                Don't have an account?{' '}
+                                <button type="button" onClick={() => setIsRegistering(true)} className="font-medium text-indigo-600 hover:underline">Register here</button>
+                            </>
+                        )}
+                    </p>
+                </form>
+            </div>
         </div>
     );
-}
+};
 
