@@ -1,30 +1,29 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom'; // <-- 1. IMPORT THE NAVIGATE HOOK
 
 // This component displays a modal for user login.
-// It receives an onClose function prop to tell the parent when to close it.
-// It also receives onSwitchToRegister to open the other modal.
 export default function LoginModal({ onClose, onSwitchToRegister }) {
     const { t } = useTranslation();
+    const navigate = useNavigate(); // <-- 2. INITIALIZE THE HOOK
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Reset error
         setError('');
 
         // --- TODO: Add your actual Firebase/API login logic here ---
-        console.log("Attempting login with:", email, password);
+        // For now, we will just pretend the login is successful
+        // and navigate directly to the dashboard.
+        console.log("Login successful, navigating to dashboard...");
 
-        // Example:
-        // if (email === "test@test.com" && password === "password") {
-        //   console.log("Login Successful!");
-        //   onClose(); // Close the modal on success
-        // } else {
-        //   setError("Invalid email or password.");
-        // }
+        // 3. NAVIGATE TO THE DASHBOARD
+        navigate('/dashboard');
+
+        // 4. CLOSE THE MODAL
+        onClose();
     };
 
     return (
@@ -53,6 +52,7 @@ export default function LoginModal({ onClose, onSwitchToRegister }) {
                     </div>
                 )}
 
+                {/* This form now triggers the handleSubmit function */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label htmlFor="login-email" className="block text-sm font-medium text-gray-700 mb-1">{t('modal_label_email')}</label>

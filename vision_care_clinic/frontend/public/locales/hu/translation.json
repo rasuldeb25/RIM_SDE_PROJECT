@@ -172,5 +172,22 @@
   "modal_label_phone": "Telefonszám",
   "modal_button_register": "Regisztráció",
   "modal_register_prompt": "Már van fiókja?",
-  "modal_register_prompt_link": "Bejelentkezés"
+  "modal_register_prompt_link": "Bejelentkezés",
+
+  "dashboard_title": "VisionCare Portál",
+  "dashboard_logout": "Kijelentkezés",
+  "dashboard_welcome": "Üdvözöljük,",
+  "dashboard_profile_title": "Páciens Információk",
+  "dashboard_profile_name": "Név",
+  "dashboard_profile_email": "Email cím",
+  "dashboard_profile_phone": "Telefonszám",
+  "dashboard_profile_dob": "Születési dátum",
+  "dashboard_appts_title": "Időpontjai",
+  "dashboard_appts_upcoming": "Következő",
+  "dashboard_appts_history": "Előzmények",
+  "dashboard_appts_none_upcoming": "Nincsenek következő időpontjai.",
+  "dashboard_appts_none_past": "Nincsenek múltbeli időpontjai.",
+  "dashboard_appts_with": "vele:",
+  "dashboard_appts_status_upcoming": "Következő",
+  "dashboard_appts_status_completed": "Befejezett"
 }

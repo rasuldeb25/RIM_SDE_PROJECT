@@ -172,5 +172,22 @@
   "modal_label_phone": "Phone Number",
   "modal_button_register": "Register",
   "modal_register_prompt": "Already have an account?",
-  "modal_register_prompt_link": "Sign In"
+  "modal_register_prompt_link": "Sign In",
+
+  "dashboard_title": "VisionCare Portal",
+  "dashboard_logout": "Logout",
+  "dashboard_welcome": "Welcome,",
+  "dashboard_profile_title": "Patient Information",
+  "dashboard_profile_name": "Name",
+  "dashboard_profile_email": "Email",
+  "dashboard_profile_phone": "Phone",
+  "dashboard_profile_dob": "Date of Birth",
+  "dashboard_appts_title": "Your Appointments",
+  "dashboard_appts_upcoming": "Upcoming",
+  "dashboard_appts_history": "History",
+  "dashboard_appts_none_upcoming": "You have no upcoming appointments.",
+  "dashboard_appts_none_past": "You have no past appointments.",
+  "dashboard_appts_with": "with",
+  "dashboard_appts_status_upcoming": "Upcoming",
+  "dashboard_appts_status_completed": "Completed"
 }
