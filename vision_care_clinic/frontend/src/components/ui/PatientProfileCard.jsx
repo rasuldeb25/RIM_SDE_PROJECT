@@ -10,7 +10,7 @@ export default function PatientProfileCard({ patient = {} }) {
             <div className="space-y-4 text-gray-700">
                 <div>
                     <p className="text-sm font-semibold text-gray-500">{t('dashboard_profile_name')}</p>
-                    <p className="text-lg">{patient.name}</p>
+                    <p className="text-lg">{patient.firstName} {patient.lastName}</p>
                 </div>
                 <div>
                     <p className="text-sm font-semibold text-gray-500">{t('dashboard_profile_email')}</p>
@@ -18,12 +18,17 @@ export default function PatientProfileCard({ patient = {} }) {
                 </div>
                 <div>
                     <p className="text-sm font-semibold text-gray-500">{t('dashboard_profile_phone')}</p>
-                    <p className="text-lg">{patient.phone}</p>
+                    <p className="text-lg">{patient.phone || 'N/A'}</p>
                 </div>
+
+                {/* --- THIS IS THE NEW SECTION --- */}
+                {/* We can now show this because it's part of the User object */}
                 <div>
                     <p className="text-sm font-semibold text-gray-500">{t('dashboard_profile_dob')}</p>
-                    <p className="text-lg">{patient.dob}</p>
+                    <p className="text-lg">{patient.dateOfBirth || 'N/A'}</p>
                 </div>
+                {/* --- END OF NEW SECTION --- */}
+
             </div>
         </div>
     );

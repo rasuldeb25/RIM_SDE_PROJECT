@@ -1,30 +1,63 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom'; // <-- 1. IMPORT THE NAVIGATE HOOK
+import { useNavigate } from 'react-router-dom';
 
 // This component displays a modal for user login.
 export default function LoginModal({ onClose, onSwitchToRegister }) {
     const { t } = useTranslation();
-    const navigate = useNavigate(); // <-- 2. INITIALIZE THE HOOK
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    // --- THIS IS THE MODIFIED FUNCTION ---
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
 
-        // --- TODO: Add your actual Firebase/API login logic here ---
-        // For now, we will just pretend the login is successful
-        // and navigate directly to the dashboard.
-        console.log("Login successful, navigating to dashboard...");
+        const loginRequest = {
+            email: email,
+            password: password
+        };
 
-        // 3. NAVIGATE TO THE DASHBOARD
-        navigate('/dashboard');
+        const apiUrl = 'http://localhost:8080/api/auth/login';
 
-        // 4. CLOSE THE MODAL
-        onClose();
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginRequest),
+            });
+
+            if (!response.ok) {
+                // Get error message from backend
+                const errorText = await response.text();
+                throw new Error(errorText || "Login failed");
+            }
+
+            // --- SUCCESS ---
+            // 1. Get the response body (which contains the token)
+            const loginResponse = await response.json(); // This will be { "token": "..." }
+
+            // 2. IMPORTANT: Save the token to localStorage
+            localStorage.setItem('userToken', loginResponse.token);
+            console.log("Token saved to localStorage:", loginResponse.token);
+
+            // 3. Navigate to the dashboard
+            navigate('/dashboard');
+
+            // 4. Close the modal
+            onClose();
+
+        } catch (error) {
+            console.error('Login failed:', error.message);
+            // Show the error from the backend (e.g., "Invalid email or password")
+            setError(error.message);
+        }
     };
+    // --- END OF MODIFIED FUNCTION ---
 
     return (
         // The overlay captures clicks to close the modal
@@ -52,7 +85,6 @@ export default function LoginModal({ onClose, onSwitchToRegister }) {
                     </div>
                 )}
 
-                {/* This form now triggers the handleSubmit function */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label htmlFor="login-email" className="block text-sm font-medium text-gray-700 mb-1">{t('modal_label_email')}</label>

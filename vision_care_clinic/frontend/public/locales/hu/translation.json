@@ -130,6 +130,7 @@
   "form_label_lastname": "Vezetéknév",
   "form_label_email": "Email cím",
   "form_label_phone": "Telefonszám",
+  "form_label_dob": "Születési dátum",
   "form_label_date": "Választott dátum",
   "form_label_time": "Választott időpont",
   "form_option_select_time": "Válasszon időpontot",
@@ -173,6 +174,8 @@
   "modal_button_register": "Regisztráció",
   "modal_register_prompt": "Már van fiókja?",
   "modal_register_prompt_link": "Bejelentkezés",
+  "dashboard_profile_dob": "Születési dátum",
+  "modal_label_dob": "Születési dátum",
 
   "dashboard_title": "VisionCare Portál",
   "dashboard_logout": "Kijelentkezés",

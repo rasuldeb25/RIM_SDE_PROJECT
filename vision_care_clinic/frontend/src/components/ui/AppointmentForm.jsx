@@ -1,31 +1,70 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next'; // <-- 1. IMPORT
-import { services } from '../../api/clinicData'; // <-- 2. IMPORT services
+import { useTranslation } from 'react-i18next';
+import { services } from '../../api/clinicData';
 
-// This component handles the logic and UI for the appointment booking form.
 export default function AppointmentForm() {
-    const { t } = useTranslation(); // <-- 3. INITIALIZE HOOK
+    const { t } = useTranslation();
 
+    // --- 1. SIMPLIFIED THE INITIAL STATE ---
+    // We keep First/Last Name, but remove email, phone, and dob
     const initialFormState = {
-        firstName: '', lastName: '', email: '', phone: '',
-        date: '', time: '', service: '', notes: ''
+        firstName: '',
+        lastName: '',
+        date: '',
+        time: '',
+        service: '',
+        notes: ''
     };
+    // --- END OF CHANGE ---
+
     const [formData, setFormData] = useState(initialFormState);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would typically send the data to your backend API
-        console.log("Form Submitted:", formData);
+        setSubmitted(false);
+        setError('');
 
-        setSubmitted(true);
-        setFormData(initialFormState); // Reset form
-        setTimeout(() => setSubmitted(false), 5000); // Hide success message after 5 seconds
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            setError("You must be logged in to book an appointment.");
+            return;
+        }
+
+        const apiUrl = 'http://localhost:8080/api/appointments/book';
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                // This now sends: firstName, lastName, date, time, service, notes
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log("Appointment saved and linked to user:", result);
+
+            setSubmitted(true);
+            setFormData(initialFormState); // Reset form
+            setTimeout(() => setSubmitted(false), 5000);
+
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setError('Failed to submit appointment. Please try again later.');
+        }
     };
 
     const today = new Date().toISOString().split('T')[0];
@@ -35,13 +74,24 @@ export default function AppointmentForm() {
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-600 mb-12">{t('form_title')}</h2>
                 <div className="max-w-2xl mx-auto bg-gray-50 p-8 rounded-2xl shadow-xl">
+
+                    {/* (Error and Submitted messages remain the same) */}
+                    {error && (
+                        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-md" role="alert">
+                            <p className="font-bold">Error!</p>
+                            <p>{error}</p>
+                        </div>
+                    )}
                     {submitted && (
                         <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-md" role="alert">
                             <p className="font-bold">{t('form_alert_success_title')}</p>
                             <p>{t('form_alert_success_desc')}</p>
                         </div>
                     )}
+
                     <form onSubmit={handleSubmit} className="space-y-6">
+
+                        {/* --- 2. PERSONAL INFO FIELDS (SIMPLIFIED) --- */}
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_firstname')}</label>
@@ -52,16 +102,8 @@ export default function AppointmentForm() {
                                 <input type="text" name="lastName" id="lastName" value={formData.lastName} onChange={handleInputChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
                             </div>
                         </div>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_email')}</label>
-                                <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
-                            </div>
-                            <div>
-                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_phone')}</label>
-                                <input type="tel" name="phone" id="phone" value={formData.phone} onChange={handleInputChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
-                            </div>
-                        </div>
+                        {/* --- Email, Phone, and DOB sections are now REMOVED --- */}
+
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_date')}</label>
@@ -87,13 +129,11 @@ export default function AppointmentForm() {
                             <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_service')}</label>
                             <select name="service" id="service" value={formData.service} onChange={handleInputChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                                 <option value="">{t('form_option_select_service')}</option>
-                                {/* We now dynamically create options from clinicData.js */}
                                 {services.map((service) => (
                                     <option key={service.slug} value={service.slug}>
                                         {t(service.titleKey)}
                                     </option>
                                 ))}
-                                {/* Add back other options if needed */}
                                 <option value="contacts">{t('form_service_contacts')}</option>
                                 <option value="disease">{t('form_service_disease')}</option>
                                 <option value="emergency">{t('form_service_emergency')}</option>
