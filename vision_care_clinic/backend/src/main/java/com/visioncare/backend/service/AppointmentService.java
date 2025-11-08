@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @Service
@@ -25,19 +28,18 @@ public class AppointmentService {
      * It now also copies the user's email and phone to the appointment.
      */
     public Appointment createAppointment(Appointment appointment, Principal principal) {
-
+        // Validate required fields
+        validateAppointment(appointment);
+        
         String email = principal.getName();
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
 
-        // --- 1. THIS IS THE NEW LOGIC ---
-        // The form no longer sends email/phone, so we get them
-        // from the logged-in user's profile and add them to the appointment.
+        // Set user information from logged-in user profile
         appointment.setEmail(user.getEmail());
         appointment.setPhone(user.getPhone());
-        // --- END OF NEW LOGIC ---
-
+        
         // This links the appointment to the user (e.g., for the dashboard)
         appointment.setUser(user);
 
@@ -58,17 +60,56 @@ public class AppointmentService {
      * @return A List of all Appointments belonging to that user.
      */
     public List<Appointment> getAppointmentsForUser(Principal principal) {
-
         // 1. Get the email of the logged-in user
         String email = principal.getName();
 
         // 2. Find the full User object from the database
-        // --- 2. THIS IS THE FIX FOR THE JOKE-ERROR ---
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
-        // --- END OF FIX ---
 
         // 3. Use our new repository method to find all appointments by this user's ID
         return appointmentRepository.findByUser_Id(user.getId());
+    }
+
+    /**
+     * Validate appointment data before saving
+     */
+    private void validateAppointment(Appointment appointment) {
+        if (appointment.getFirstName() == null || appointment.getFirstName().trim().isEmpty()) {
+            throw new IllegalArgumentException("First name is required");
+        }
+        if (appointment.getLastName() == null || appointment.getLastName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name is required");
+        }
+        if (appointment.getDate() == null || appointment.getDate().trim().isEmpty()) {
+            throw new IllegalArgumentException("Appointment date is required");
+        }
+        if (appointment.getTime() == null || appointment.getTime().trim().isEmpty()) {
+            throw new IllegalArgumentException("Appointment time is required");
+        }
+        if (appointment.getService() == null || appointment.getService().trim().isEmpty()) {
+            throw new IllegalArgumentException("Service type is required");
+        }
+        
+        // Validate date format and ensure it's not in the past
+        validateDate(appointment.getDate());
+    }
+
+    /**
+     * Validate date string format and ensure it's not in the past
+     */
+    private void validateDate(String dateString) {
+        try {
+            // Parse the date string (expecting format: yyyy-MM-dd)
+            LocalDate appointmentDate = LocalDate.parse(dateString);
+            LocalDate today = LocalDate.now();
+            
+            // Check if date is in the past
+            if (appointmentDate.isBefore(today)) {
+                throw new IllegalArgumentException("Appointment date cannot be in the past");
+            }
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format. Please use YYYY-MM-DD format");
+        }
     }
 }

@@ -4,7 +4,6 @@
   "contact": "Kapcsolat",
   "patient_portal": "Páciens Portál",
   "learn_more": "Tudj meg többet",
-
   "service_comprehensivetitle": "Átfogó Szemvizsgálat",
   "service_comprehensivedesc": "Teljes körű látás- és szemegészségügyi értékelés.",
   "service_lasiktitle": "LASIK Konzultáció",
@@ -17,15 +16,11 @@
   "service_ophthodesc": "Helyreállító műtétek tapasztalt szakemberektől.",
   "service_ipltitle": "IPL Szelektív Fototerápia",
   "service_ipldesc": "Modern kezelés a 'száraz szem' szindrómára.",
-
   "stats_patients": "Ezer Elégedett Páciens",
   "stats_operations": "Típusú Sebészeti Beavatkozás",
   "stats_experience": "Év Sikeres Műtét",
-
   "services_section_subtitle": "Szolgáltatásaink",
-
   "page_specialists_title": "Szakembereink",
-
   "comp_page_title": "Mi az átfogó szemvizsgálat?",
   "comp_page_desc": "Átfogó szemvizsgálatunk túlmutat egy egyszerű látásvizsgálaton. Kiértékeljük szemei teljes egészségi állapotát, keresve a glaukóma, szürkehályog, makuladegeneráció és egyéb betegségek jeleit. A rendszeres vizsgálat kulcsfontosságú a korai felismeréshez és a látás megőrzéséhez.",
   "comp_page_what_we_check": "Mit ellenőrzünk",
@@ -35,7 +30,6 @@
   "comp_page_item4": "Glaukóma (szembelnyomás)",
   "comp_page_item5": "Szürkehályog jelei",
   "comp_page_item6": "Retina egészsége",
-
   "lasik_page_title1": "Mi a lézeres látáskorrekció?",
   "lasik_page_desc1": "A lézeres látáskorrekció egy 10 perces eljárás, amely jó látást biztosíthat szemüveg vagy kontaktlencse nélkül. Ez egy teljesen fájdalommentes és biztonságos módszer, amely lehetővé teszi a páciensek számára, hogy visszanyerjék látásukba vetett bizalmukat. Ez az eljárás a szaruhártya alakjának megváltoztatásával korrigálja a rövidlátást, a távollátást és az asztigmatizmust.",
   "lasik_page_title2": "A lézeres korrekció előnyei",
@@ -56,7 +50,6 @@
   "lasik_page_temp_item3": "Szaruhártya disztrófia változásai",
   "lasik_page_temp_item4": "Terhesség és szoptatás időszaka",
   "lasik_page_specialist_title": "LASIK specialistánk",
-
   "pediatric_page_title1": "Mi a gyermek szemészet?",
   "pediatric_page_desc1": "A gyermekek látása kritikus a fejlődésük szempontjából. Gyermek szemészeti szolgáltatásainkat gyermekbarát módon alakítottuk ki, ellenőrizve az olyan gyakori problémákat, mint a 'lusta szem' (amblyopia), a kancsalság (strabismus), és biztosítva, hogy rendelkezzenek az iskolához szükséges vizuális készségekkel.",
   "pediatric_page_title2": "Általunk kezelt gyakori állapotok",
@@ -66,7 +59,6 @@
   "pediatric_page_item4": "Conjunctivitis ('Rózsaszín szem')",
   "pediatric_page_item5": "Elzáródott könnycsatornák",
   "pediatric_page_specialist_title": "Gyermek specialistánk",
-
   "corneal_page_title1": "Mi a Keratoplasztika?",
   "corneal_page_desc1": "A keratoplasztika (szaruhártya-átültetés) egy sebészeti műtét a sérülések, sebek és betegségek okozta szaruhártya-hibák és deformitások eltávolítására. Ez a műtét egy új szaruhártya átültetésére irányul donortól, helyreállítva annak alakját és funkcióját. Lehetőség van az egész szaruhártya vagy csak annak sérült rétegeinek cseréjére.",
   "corneal_page_title2": "Mikor van rá szükség?",
@@ -85,7 +77,6 @@
   "corneal_page_stage3_title": "3. szakasz",
   "corneal_page_stage3_subtitle": "Rehabilitáció",
   "corneal_page_stage3_desc": "Akár 1 év",
-
   "ophtho_page_title1": "Mi az Ophthalmoplasztika?",
   "ophtho_page_desc1": "Az ophthalmoplasztika a szem körüli kozmetikai és plasztikai műtétek összessége. Ma ez a két fogalom kiegészíti egymást, mivel nagyon közel állnak egymáshoz. A szem egy különálló szerv, amely nagy figyelmet igényel, ezért klinikánk szakemberei ezen a korlátozott területen rendelkeznek ismeretekkel.",
   "ophtho_page_title2": "Milyen műtéteket végeznek?",
@@ -94,7 +85,6 @@
   "ophtho_page_item3": "Műtétek a ptózis (lógás) megszüntetésére",
   "ophtho_page_item4": "Szemhéjak sebészeti korrekciója",
   "ophtho_page_specialist_title": "Szakemberünk",
-
   "ipl_page_title1": "Mi az IPL Szelektív Fototerápia?",
   "ipl_page_desc1": "Modern IPL (Intenzív Pulzáló Fény) szelektív fototerápiát biztosítunk, amely egy rendkívül hatékony és modern kezelés a \"száraz szem\" szindrómára. Ez a nem invazív eljárás segít javítani a könny funkcióját és enyhíteni a tüneteket a állapot kiváltó okainak megcélzásával.",
   "ipl_page_title2": "Az IPL kezelés előnyei",
@@ -103,7 +93,6 @@
   "ipl_page_item3": "Enyhíti a szemszárazság tüneteit",
   "ipl_page_item4": "Nem invazív és gyors eljárás",
   "ipl_page_specialist_title": "Szakemberünk",
-
   "doc_1_name": "Dr. Marcus Cole",
   "doc_1_title": "Vezető optometrista, O.D.",
   "doc_1_bio": "Dr. Cole több mint 15 éves tapasztalattal rendelkezik az átfogó szemellátásban, és a komplex szembetegségek diagnosztizálására szakosodott.",
@@ -122,7 +111,6 @@
   "doc_6_name": "Dr. Evelyn Reed",
   "doc_6_title": "Sebészeti tanácsadó, M.D.",
   "doc_6_bio": "Dr. Reed a vezető sebészeti tanácsadónk, aki a LASIK és a szürkehályog-műtétek előtti kiértékelésekre szakosodott.",
-
   "form_title": "Időpontfoglalás",
   "form_alert_success_title": "Siker!",
   "form_alert_success_desc": "Kérését sikeresen elküldtük. Hamarosan felvesszük Önnel a kapcsolatot.",
@@ -151,7 +139,6 @@
   "form_label_notes": "További megjegyzések",
   "form_placeholder_notes": "Tünetek vagy aggodalmak...",
   "form_button_submit": "Időpontfoglalás",
-
   "footer_contact": "Kapcsolat",
   "footer_address": "Látás u. 123, Szemváros",
   "footer_phone": "(555) 123-4567",
@@ -160,7 +147,6 @@
   "footer_hours_sat": "Szombat: 9:00 - 16:00",
   "footer_quicklinks": "Gyors linkek",
   "footer_copyright": "VisionCare. Minden jog fenntartva.",
-
   "modal_login_title": "Páciens Portál Belépés",
   "modal_label_email": "Email cím",
   "modal_label_password": "Jelszó",
@@ -176,7 +162,6 @@
   "modal_register_prompt_link": "Bejelentkezés",
   "dashboard_profile_dob": "Születési dátum",
   "modal_label_dob": "Születési dátum",
-
   "dashboard_title": "VisionCare Portál",
   "dashboard_logout": "Kijelentkezés",
   "dashboard_welcome": "Üdvözöljük,",
@@ -192,5 +177,26 @@
   "dashboard_appts_none_past": "Nincsenek múltbeli időpontjai.",
   "dashboard_appts_with": "vele:",
   "dashboard_appts_status_upcoming": "Következő",
-  "dashboard_appts_status_completed": "Befejezett"
+  "dashboard_appts_status_completed": "Befejezett",
+  "bringing_pet_question": "Hoz magával háziállatot?",
+  "pet_details_label": "További információk a háziállatról",
+  "pet_details_placeholder": "Információk a háziállatról (fajta, faj, speciális igények, stb.)",
+  "pet_details_description": "Tájékoztasson minket a háziállatáról, hogy felkészülhessünk",
+  "edit_profile": "Profil szerkesztése",
+  "save": "Mentés",
+  "save_changes": "Változtatások mentése",
+  "cancel": "Mégse",
+  "personal_information": "Személyes információk",
+  "first_name": "Keresztnév",
+  "last_name": "Vezetéknév",
+  "pet_information": "Háziállat információk",
+  "has_pet": "Van háziállata?",
+  "pet_type": "Állat fajtája",
+  "pet_name": "Háziállat neve",
+  "favorite_treat": "Kedvenc csemege",
+  "select_pet_type": "Válassza ki az állat fajtáját",
+  "pet_name_placeholder": "Adja meg háziállata nevét",
+  "favorite_treat_placeholder": "Adja meg a kedvenc csemegét",
+  "yes": "Igen",
+  "no": "Nem"
 }

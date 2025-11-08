@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -44,4 +42,43 @@ public class UserController {
         // (Spring automatically hides the password)
         return ResponseEntity.ok(user);
     }
+
+    /**
+     * Update user profile including pet information
+     * PUT /api/auth/profile
+     */
+    @PutMapping("/profile")
+    public ResponseEntity<?> updateUserProfile(@RequestBody User updatedUser, Principal principal) {
+        try {
+            String email = principal.getName();
+            
+            // Find the existing user
+            User existingUser = userRepository.findByEmail(email)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+            
+            // Update only the allowed fields (don't update email, password, or ID)
+            existingUser.setFirstName(updatedUser.getFirstName());
+            existingUser.setLastName(updatedUser.getLastName());
+            existingUser.setPhone(updatedUser.getPhone());
+            existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
+            
+            // Update pet profile fields
+            existingUser.setHasPet(updatedUser.getHasPet());
+            existingUser.setPetType(updatedUser.getPetType());
+            existingUser.setPetName(updatedUser.getPetName());
+            existingUser.setPetFavoriteTreat(updatedUser.getPetFavoriteTreat());
+            
+            // Save the updated user
+            User savedUser = userRepository.save(existingUser);
+            
+            return ResponseEntity.ok(savedUser);
+            
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error updating profile");
+        }
+    }
+
+
 }

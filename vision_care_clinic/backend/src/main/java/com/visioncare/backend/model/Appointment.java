@@ -2,6 +2,7 @@ package com.visioncare.backend.model;
 
 import jakarta.persistence.*;
 
+
 /**
  * This is our Appointment Entity.
  */
@@ -21,7 +22,11 @@ public class Appointment {
     private String time;
     private String service;
 
-    // 'dateOfBirth' field has been REMOVED from here.
+    // NEW PET FIELDS
+    private Boolean bringingPet;
+    
+    @Column(length = 1024)
+    private String petDetails;
 
     @Column(length = 1024)
     private String notes;
@@ -29,7 +34,6 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
 
     /**
      * JPA requires a no-argument constructor.
@@ -55,10 +59,15 @@ public class Appointment {
     public void setTime(String time) { this.time = time; }
     public String getService() { return service; }
     public void setService(String service) { this.service = service; }
+    
+    // NEW PET GETTERS AND SETTERS
+    public Boolean getBringingPet() { return bringingPet; }
+    public void setBringingPet(Boolean bringingPet) { this.bringingPet = bringingPet; }
+    public String getPetDetails() { return petDetails; }
+    public void setPetDetails(String petDetails) { this.petDetails = petDetails; }
+    
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
-
-    // The get/set methods for 'dateOfBirth' have been REMOVED.
 }

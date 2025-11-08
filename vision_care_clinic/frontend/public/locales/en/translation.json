@@ -4,7 +4,6 @@
   "contact": "Contact",
   "patient_portal": "Patient Portal",
   "learn_more": "Learn More",
-
   "service_comprehensivetitle": "Comprehensive Eye Exams",
   "service_comprehensivedesc": "Complete vision and eye health evaluations.",
   "service_lasiktitle": "LASIK Consultation",
@@ -17,15 +16,11 @@
   "service_ophthodesc": "Reconstructive operations by experienced specialists.",
   "service_ipltitle": "IPL Selective Phototherapy",
   "service_ipldesc": "Modern treatment for 'dry eye' syndrome.",
-
   "stats_patients": "Thousand Happy Patients",
   "stats_operations": "Types of Surgical Operations",
   "stats_experience": "Years of Successful Operations",
-
   "services_section_subtitle": "Our Services",
-
   "page_specialists_title": "Our Specialists",
-
   "comp_page_title": "What is a Comprehensive Eye Exam?",
   "comp_page_desc": "Our comprehensive eye exam goes beyond a simple vision test. We evaluate the complete health of your eyes, checking for signs of glaucoma, cataracts, macular degeneration, and other diseases. Regular exams are key to early detection and preserving your vision.",
   "comp_page_what_we_check": "What We Check For",
@@ -35,7 +30,6 @@
   "comp_page_item4": "Glaucoma (Eye Pressure)",
   "comp_page_item5": "Signs of Cataracts",
   "comp_page_item6": "Retinal Health",
-
   "lasik_page_title1": "What is Laser Vision Correction?",
   "lasik_page_desc1": "Laser vision correction is a 10-minute procedure that can give you good vision without glasses or contact lenses. It is a completely painless and safe method that allows patients to regain confidence in their vision. This procedure corrects nearsightedness, farsightedness, and astigmatism by changing the shape of the cornea.",
   "lasik_page_title2": "Advantages of Laser Correction",
@@ -56,7 +50,6 @@
   "lasik_page_temp_item3": "Corneal dystrophy changes",
   "lasik_page_temp_item4": "Pregnancy and lactation period",
   "lasik_page_specialist_title": "Our LASIK Specialist",
-
   "pediatric_page_title1": "What is Pediatric Eye Care?",
   "pediatric_page_desc1": "Children's vision is critical to their development. Our pediatric eye care services are designed to be child-friendly, checking for common issues like 'lazy eye' (amblyopia), strabismus (crossed eyes), and ensuring they have the visual skills needed for school.",
   "pediatric_page_title2": "Common Conditions We Treat",
@@ -66,7 +59,6 @@
   "pediatric_page_item4": "Conjunctivitis (\"Pink Eye\")",
   "pediatric_page_item5": "Blocked Tear Ducts",
   "pediatric_page_specialist_title": "Our Pediatric Specialist",
-
   "corneal_page_title1": "What is Keratoplasty?",
   "corneal_page_desc1": "Keratoplasty (Corneal Transplantation) is a surgical operation to remove corneal defects and deformities caused by injuries, wounds, and diseases. This operation is aimed at transplanting a new cornea from a donor, restoring its shape and function. It is possible to replace either the entire cornea or only its damaged layers.",
   "corneal_page_title2": "When is it Needed?",
@@ -85,7 +77,6 @@
   "corneal_page_stage3_title": "Stage 3",
   "corneal_page_stage3_subtitle": "Rehabilitation",
   "corneal_page_stage3_desc": "Up to 1 year",
-
   "ophtho_page_title1": "What is Ophthalmoplasty?",
   "ophtho_page_desc1": "Ophthalmoplasty is a complex of cosmetic and plastic operations in the eye area. Today, these two concepts complement each other, as they are very close in spirit. The eye is a separate organ that requires great attention, so specialists in our clinic have knowledge in this limited area.",
   "ophtho_page_title2": "What Operations are Performed?",
@@ -94,7 +85,6 @@
   "ophtho_page_item3": "Operations to eliminate ptosis (drooping)",
   "ophtho_page_item4": "Surgical correction of eyelids",
   "ophtho_page_specialist_title": "Our Specialist",
-
   "ipl_page_title1": "What is IPL Selective Phototherapy?",
   "ipl_page_desc1": "We provide modern IPL (Intense Pulsed Light) selective phototherapy, a highly effective and modern treatment for \"dry eye\" syndrome. This non-invasive procedure helps improve tear function and relieve symptoms by targeting the root causes of the condition.",
   "ipl_page_title2": "Benefits of IPL Treatment",
@@ -103,7 +93,6 @@
   "ipl_page_item3": "Alleviates symptoms of dryness",
   "ipl_page_item4": "Non-invasive and quick procedure",
   "ipl_page_specialist_title": "Our Specialist",
-
   "doc_1_name": "Dr. Marcus Cole",
   "doc_1_title": "Lead Optometrist, O.D.",
   "doc_1_bio": "Dr. Cole has over 15 years of experience in comprehensive eye care and specializes in diagnosing complex eye diseases.",
@@ -122,7 +111,6 @@
   "doc_6_name": "Dr. Evelyn Reed",
   "doc_6_title": "Surgical Consultant, M.D.",
   "doc_6_bio": "Dr. Reed is our chief surgical consultant, specializing in pre-operative evaluations for LASIK and cataract surgery.",
-
   "form_title": "Book Your Appointment",
   "form_alert_success_title": "Success!",
   "form_alert_success_desc": "Your request has been submitted. We'll be in touch.",
@@ -151,7 +139,6 @@
   "form_label_notes": "Additional Notes",
   "form_placeholder_notes": "Any symptoms or concerns...",
   "form_button_submit": "Book Appointment",
-
   "footer_contact": "Contact",
   "footer_address": "123 Vision St, Eye City",
   "footer_phone": "(555) 123-4567",
@@ -160,7 +147,6 @@
   "footer_hours_sat": "Saturday: 9am - 4pm",
   "footer_quicklinks": "Quick Links",
   "footer_copyright": "VisionCare. All rights reserved.",
-
   "modal_login_title": "Patient Portal Login",
   "modal_label_email": "Email Address",
   "modal_label_password": "Password",
@@ -176,7 +162,6 @@
   "dashboard_profile_dob": "Date of Birth",
   "modal_register_prompt_link": "Sign In",
   "modal_label_dob": "Date of Birth",
-
   "dashboard_title": "VisionCare Portal",
   "dashboard_logout": "Logout",
   "dashboard_welcome": "Welcome,",
@@ -192,5 +177,35 @@
   "dashboard_appts_none_past": "You have no past appointments.",
   "dashboard_appts_with": "with",
   "dashboard_appts_status_upcoming": "Upcoming",
-  "dashboard_appts_status_completed": "Completed"
+  "dashboard_appts_status_completed": "Completed",
+  "bringing_pet_question": "Will you be bringing a pet?",
+  "pet_details_label": "Additional Notes about your pet",
+  "pet_details_placeholder": "Notes about your pet (type, breed, special needs, etc.)",
+  "pet_details_description": "Let us know about your pet so we can be prepared",
+  "edit_profile": "Edit Profile",
+  "save": "Save",
+  "save_changes": "Save Changes",
+  "cancel": "Cancel",
+  "personal_information": "Personal Information",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "pet_information": "Pet Information",
+  "has_pet": "Do you have a pet?",
+  "pet_type": "Type of Animal",
+  "pet_name": "Pet's Name",
+  "favorite_treat": "Favorite Treat",
+  "select_pet_type": "Select pet type",
+  "pet_name_placeholder": "Enter your pet's name",
+  "favorite_treat_placeholder": "Enter favorite treat",
+  "yes": "Yes",
+  "no": "No",
+  "update_failed": "Failed to update profile. Please try again.",
+  "saving": "Saving...",
+  "dog": "Dog",
+  "cat": "Cat", 
+  "bird": "Bird",
+  "rabbit": "Rabbit",
+  "hamster": "Hamster",
+  "fish": "Fish",
+  "other": "Other"
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'; // <-- 1. IMPORT useMemo
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -6,11 +6,10 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import PatientProfileCard from '../components/ui/PatientProfileCard';
 import AppointmentHistory from '../components/ui/AppointmentHistory';
+import EditProfileModal from '../components/ui/EditProfileModal'; 
 
-// --- 1. IMPORT THE SERVICES DATA ---
 import { services } from '../api/clinicData';
 
-// --- Main Page Component ---
 export default function DashboardPage() {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -18,14 +17,11 @@ export default function DashboardPage() {
     const [patient, setPatient] = useState(null);
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showEditModal, setShowEditModal] = useState(false); 
 
-    // --- 2. CREATE A MEMOIZED LOOKUP MAP ---
-    // We use useMemo with an empty dependency array []
-    // This ensures the Map is created ONLY ONCE, not on every re-render.
-    // This is the fix for the infinite loop.
     const serviceKeyMap = useMemo(() => {
         return new Map(services.map(s => [s.slug, s.titleKey]));
-    }, []); // <-- 2. THE FIX: Wrap in useMemo and use empty dependency array
+    }, []);
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
@@ -36,7 +32,6 @@ export default function DashboardPage() {
 
         const fetchDashboardData = async () => {
             try {
-                // Fetch Profile and Appointments at the same time
                 const [profileResponse, appointmentsResponse] = await Promise.all([
                     fetch('http://localhost:8080/api/auth/me', {
                         headers: { 'Authorization': `Bearer ${token}` }
@@ -53,7 +48,6 @@ export default function DashboardPage() {
                 if (!appointmentsResponse.ok) throw new Error('Failed to fetch appointments.');
                 const appointmentData = await appointmentsResponse.json();
 
-                // --- 3. THIS IS THE FIXED TRANSLATION LOGIC ---
                 const translatedAppointments = appointmentData.map(appt => {
                     const titleKey = serviceKeyMap.get(appt.service) || appt.service;
                     return {
@@ -61,7 +55,6 @@ export default function DashboardPage() {
                         service: t(titleKey)
                     };
                 });
-                // --- END OF FIX ---
 
                 setAppointments(translatedAppointments);
 
@@ -75,11 +68,24 @@ export default function DashboardPage() {
         };
 
         fetchDashboardData();
-    }, [navigate, t, serviceKeyMap]); // This dependency is now stable
+    }, [navigate, t, serviceKeyMap]);
 
     const handleLogout = () => {
         localStorage.removeItem('userToken');
         navigate('/');
+    };
+
+    const handleEditProfile = () => {
+        setShowEditModal(true);
+    };
+
+    const handleSaveProfile = (updatedPatient) => {
+        setPatient(updatedPatient);
+        setShowEditModal(false);
+    };
+
+    const handleCloseModal = () => {
+        setShowEditModal(false);
     };
 
     if (loading || !patient) {
@@ -100,11 +106,19 @@ export default function DashboardPage() {
             <main className="container mx-auto p-4 md:p-8 flex-grow pt-20">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">{t('dashboard_welcome')} {patient.firstName}!</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <PatientProfileCard patient={patient} />
+                    <PatientProfileCard patient={patient} onEdit={handleEditProfile} />
                     <AppointmentHistory appointments={appointments} />
                 </div>
             </main>
             <Footer />
+
+            {showEditModal && patient && (
+                <EditProfileModal
+                    patient={patient}
+                    onSave={handleSaveProfile}
+                    onClose={handleCloseModal}
+                />
+            )}
         </div>
     );
 }

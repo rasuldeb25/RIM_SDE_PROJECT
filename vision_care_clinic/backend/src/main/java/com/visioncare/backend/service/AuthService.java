@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthService {
@@ -68,5 +69,67 @@ public class AuthService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found after successful login. This should not happen."));
 
         return jwtService.generateToken(user);
+    }
+
+    /**
+     * 3. NEW METHOD: Update user profile including pet information
+     */
+    @Transactional
+    public User updateUserProfile(String email, User updatedUser) {
+        User existingUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+        // Update basic profile information
+        if (updatedUser.getFirstName() != null) {
+            existingUser.setFirstName(updatedUser.getFirstName());
+        }
+        if (updatedUser.getLastName() != null) {
+            existingUser.setLastName(updatedUser.getLastName());
+        }
+        if (updatedUser.getPhone() != null) {
+            existingUser.setPhone(updatedUser.getPhone());
+        }
+        if (updatedUser.getDateOfBirth() != null) {
+            existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
+        }
+
+        // Update pet profile information
+        existingUser.setHasPet(updatedUser.getHasPet());
+        if (updatedUser.getPetType() != null) {
+            existingUser.setPetType(updatedUser.getPetType());
+        }
+        if (updatedUser.getPetName() != null) {
+            existingUser.setPetName(updatedUser.getPetName());
+        }
+        if (updatedUser.getPetFavoriteTreat() != null) {
+            existingUser.setPetFavoriteTreat(updatedUser.getPetFavoriteTreat());
+        }
+
+        return userRepository.save(existingUser);
+    }
+
+    /**
+     * Alternative version: Update specific profile fields only
+     */
+    @Transactional
+    public User updateUserProfile(String email, String firstName, String lastName, String phone, 
+                                 String dateOfBirth, Boolean hasPet, String petType, 
+                                 String petName, String petFavoriteTreat) {
+        User existingUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+        // Update fields if provided
+        if (firstName != null) existingUser.setFirstName(firstName);
+        if (lastName != null) existingUser.setLastName(lastName);
+        if (phone != null) existingUser.setPhone(phone);
+        if (dateOfBirth != null) existingUser.setDateOfBirth(dateOfBirth);
+        
+        // Pet fields
+        existingUser.setHasPet(hasPet);
+        if (petType != null) existingUser.setPetType(petType);
+        if (petName != null) existingUser.setPetName(petName);
+        if (petFavoriteTreat != null) existingUser.setPetFavoriteTreat(petFavoriteTreat);
+
+        return userRepository.save(existingUser);
     }
 }

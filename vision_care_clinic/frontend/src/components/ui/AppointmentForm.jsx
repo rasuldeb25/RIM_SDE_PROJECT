@@ -5,25 +5,27 @@ import { services } from '../../api/clinicData';
 export default function AppointmentForm() {
     const { t } = useTranslation();
 
-    // --- 1. SIMPLIFIED THE INITIAL STATE ---
-    // We keep First/Last Name, but remove email, phone, and dob
     const initialFormState = {
         firstName: '',
         lastName: '',
         date: '',
         time: '',
         service: '',
-        notes: ''
+        notes: '',
+        bringingPet: false, 
+        petDetails: ''      
     };
-    // --- END OF CHANGE ---
 
     const [formData, setFormData] = useState(initialFormState);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState('');
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ 
+            ...prev, 
+            [name]: type === 'checkbox' ? checked : value 
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -46,7 +48,6 @@ export default function AppointmentForm() {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                // This now sends: firstName, lastName, date, time, service, notes
                 body: JSON.stringify(formData),
             });
 
@@ -58,7 +59,7 @@ export default function AppointmentForm() {
             console.log("Appointment saved and linked to user:", result);
 
             setSubmitted(true);
-            setFormData(initialFormState); // Reset form
+            setFormData(initialFormState); 
             setTimeout(() => setSubmitted(false), 5000);
 
         } catch (error) {
@@ -75,7 +76,6 @@ export default function AppointmentForm() {
                 <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-600 mb-12">{t('form_title')}</h2>
                 <div className="max-w-2xl mx-auto bg-gray-50 p-8 rounded-2xl shadow-xl">
 
-                    {/* (Error and Submitted messages remain the same) */}
                     {error && (
                         <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-md" role="alert">
                             <p className="font-bold">Error!</p>
@@ -91,7 +91,7 @@ export default function AppointmentForm() {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
 
-                        {/* --- 2. PERSONAL INFO FIELDS (SIMPLIFIED) --- */}
+                        {/* Personal Info Fields */}
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_firstname')}</label>
@@ -102,7 +102,6 @@ export default function AppointmentForm() {
                                 <input type="text" name="lastName" id="lastName" value={formData.lastName} onChange={handleInputChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"/>
                             </div>
                         </div>
-                        {/* --- Email, Phone, and DOB sections are now REMOVED --- */}
 
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
@@ -125,6 +124,7 @@ export default function AppointmentForm() {
                                 </select>
                             </div>
                         </div>
+
                         <div>
                             <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_service')}</label>
                             <select name="service" id="service" value={formData.service} onChange={handleInputChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
@@ -139,6 +139,48 @@ export default function AppointmentForm() {
                                 <option value="emergency">{t('form_service_emergency')}</option>
                             </select>
                         </div>
+
+                        {/* Bringing Pet Section - FIXED TRANSLATION KEYS */}
+                        <div className="border-t pt-4 mt-4">
+                            <div className="mb-4">
+                                <label className="flex items-center space-x-3">
+                                    <input
+                                        type="checkbox"
+                                        name="bringingPet"
+                                        checked={formData.bringingPet}
+                                        onChange={handleInputChange}
+                                        className="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                                    />
+                                    <span className="text-lg font-medium text-gray-700">
+                                        {t('bringing_pet_question')}
+                                    </span>
+                                </label>
+                            </div>
+
+                            {/* Show additional pet details only if bringing pet */}
+                            {formData.bringingPet && (
+                                <div className="ml-8 bg-indigo-50 p-4 rounded-lg space-y-4">
+                                    <div>
+                                        <label htmlFor="petDetails" className="block text-sm font-medium text-gray-700 mb-1">
+                                            {t('pet_details_label')}
+                                        </label>
+                                        <textarea
+                                            name="petDetails"
+                                            id="petDetails"
+                                            rows="3"
+                                            value={formData.petDetails}
+                                            onChange={handleInputChange}
+                                            placeholder={t('pet_details_placeholder')}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        ></textarea>
+                                        <p className="text-sm text-gray-500 mt-1">
+                                            {t('pet_details_description')}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
                         <div>
                             <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">{t('form_label_notes')}</label>
                             <textarea
@@ -151,6 +193,7 @@ export default function AppointmentForm() {
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
                             ></textarea>
                         </div>
+
                         <button type="submit" className="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-indigo-700 transition-all shadow-lg">
                             {t('form_button_submit')}
                         </button>
@@ -159,4 +202,4 @@ export default function AppointmentForm() {
             </div>
         </section>
     );
-};
+}

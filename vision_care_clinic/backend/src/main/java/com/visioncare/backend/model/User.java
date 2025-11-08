@@ -40,11 +40,23 @@ public class User implements UserDetails {
     private String dateOfBirth;
     // --- END OF NEW CODE ---
 
+    // --- 2. PET PROFILE FIELDS ---
+    @Column(name = "has_pet", nullable = true)
+    private Boolean hasPet;
+
+    @Column(name = "pet_type", nullable = true)
+    private String petType;
+
+    @Column(name = "pet_name", nullable = true)
+    private String petName;
+
+    @Column(name = "favorite_treat", nullable = true)
+    private String petFavoriteTreat;
+    // --- END OF PET PROFILE FIELDS ---
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Appointment> appointments;
-
 
     // --- Constructors ---
     public User() {
@@ -66,7 +78,7 @@ public class User implements UserDetails {
     public List<Appointment> getAppointments() { return appointments; }
     public void setAppointments(List<Appointment> appointments) { this.appointments = appointments; }
 
-    // --- 2. ADD GETTERS/SETTERS FOR THE NEW DATE OF BIRTH FIELD ---
+    // --- GETTERS/SETTERS FOR DATE OF BIRTH FIELD ---
     public String getDateOfBirth() {
         return dateOfBirth;
     }
@@ -74,8 +86,40 @@ public class User implements UserDetails {
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-    // --- END OF NEW CODE ---
 
+    // --- GETTERS/SETTERS FOR PET PROFILE FIELDS ---
+    public Boolean getHasPet() {
+        return hasPet;
+    }
+
+    public void setHasPet(Boolean hasPet) {
+        this.hasPet = hasPet;
+    }
+
+    public String getPetType() {
+        return petType;
+    }
+
+    public void setPetType(String petType) {
+        this.petType = petType;
+    }
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public String getPetFavoriteTreat() {
+        return petFavoriteTreat;
+    }
+
+    public void setPetFavoriteTreat(String petFavoriteTreat) {
+        this.petFavoriteTreat = petFavoriteTreat;
+    }
+    // --- END OF PET PROFILE GETTERS/SETTERS ---
 
     // --- UserDetails Interface Methods ---
     // (All the methods like getPassword(), getUsername(), isEnabled(), etc. are unchanged)
