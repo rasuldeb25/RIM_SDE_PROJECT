@@ -17,7 +17,7 @@ The project is built with a modern technology stack, featuring a Spring Boot bac
     *   [Backend Setup](#2-backend-setup)
     *   [Frontend Setup](#3-frontend-setup)
 6.  [Configuration](#configuration)
-7.  [API Documentation](#api-documentation)
+7.  [Documentation](#documentation)
 8.  [Contributing](#contributing)
 9.  [License](#license)
 
@@ -196,31 +196,24 @@ For production environments, it is recommended to pass sensitive information via
 
 ---
 
-## API Documentation
+## Documentation
 
-The backend provides the following REST API endpoints. Use a tool like Postman or cURL to test them.
+For more detailed information, please refer to the following guides located in the `docs/` directory:
 
-### Authentication (`/api/auth`)
+*   **[API Reference](docs/API_REFERENCE.md)**: Detailed documentation of all backend REST API endpoints, including request/response examples.
+*   **[Frontend Guide](docs/FRONTEND_GUIDE.md)**: Overview of the React application structure, components, routing, and internationalization.
+*   **[Backend Guide](docs/BACKEND_GUIDE.md)**: Architecture details, database schema, security flow, and development guidelines for the Spring Boot backend.
 
-*   **POST** `/api/auth/register`
-    *   **Description**: Register a new user.
-    *   **Body**: `{ "email": "user@example.com", "password": "securePass", "firstName": "John", "lastName": "Doe" }`
-*   **POST** `/api/auth/login`
-    *   **Description**: Authenticate a user and retrieve a JWT.
-    *   **Body**: `{ "email": "user@example.com", "password": "securePass" }`
-    *   **Response**: `{ "token": "eyJhbGciOiJIUzI1Ni..." }`
+### Quick API Overview
 
-### Appointments (`/api/appointments`)
+#### Authentication (`/api/auth`)
+*   `POST /register`: Register a new user.
+*   `POST /login`: Authenticate and receive a JWT.
+*   `GET /me`: Get current user profile.
 
-*Note: These endpoints generally require a valid JWT in the `Authorization` header (Bearer schema).*
-
-*   **POST** `/api/appointments/book`
-    *   **Description**: Book a new appointment for the authenticated user.
-    *   **Body**: `{ "date": "2023-12-25T10:00:00", "reason": "Checkup", ... }`
-*   **GET** `/api/appointments/me`
-    *   **Description**: Retrieve all appointments for the currently logged-in user.
-*   **GET** `/api/appointments`
-    *   **Description**: Retrieve all appointments (Admin/Testing use).
+#### Appointments (`/api/appointments`)
+*   `POST /book`: Book an appointment.
+*   `GET /me`: Get my appointments.
 
 ---
 
